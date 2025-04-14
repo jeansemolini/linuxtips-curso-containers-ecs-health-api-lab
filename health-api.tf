@@ -1,16 +1,12 @@
 module "health_api" {
-  # source = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1.3.1"
-
-
-  source       = "/Users/matheus/Workspace/linuxtips/linuxtips-curso-containers-ecs-service-module"
+  #source = "github.com/msfidelis/linuxtips-curso-containers-ecs-service-module?ref=v1.3.1"
+  source       = "/Users/jean/Documents/desenvolvimento/cursos/containers linuxtips/linuxtips-curso-containers-ecs-service-module"
   region       = var.region
   cluster_name = var.cluster_name
 
-  service_name   = "nutrition-health-api"
-  service_port   = "8080"
+  service_name = "nutrition-health-api"
+  service_port = "8080"
 
-  service_protocol = "http"
-  
   service_cpu    = 256
   service_memory = 512
 
@@ -47,6 +43,8 @@ module "health_api" {
   ]
 
   // Service Connect
+  use_service_connect  = true
+  service_protocol     = "http"
   service_connect_name = data.aws_ssm_parameter.service_connect_name.value
   service_connect_arn  = data.aws_ssm_parameter.service_connect_namespace_arn.value
 
